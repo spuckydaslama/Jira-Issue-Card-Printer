@@ -380,17 +380,6 @@
   function printPreviewElement() {
     var result = $('<div/>').html(global.printPreviewHtml).contents();
 
-    // info
-    result.find("#report-issue").click(function(event) {
-      window.open('https://github.com/spuckydaslama/Jira-Issue-Card-Printer/issues');
-      return false;
-    });
-
-    result.find("#about").click(function(event) {
-      window.open('http://spuckydaslama.blogspot.de/2014/01/jira-issue-card-printer-bookmarklet.html');
-      return false;
-    });
-
     // enable single card page
 
     result.find("#single-card-page-checkbox").click(function() {
@@ -1082,11 +1071,6 @@
            <div class="issue-description"></div>
          </div>
          <div class="card-header">
-           <div class="author">
-             <span>spuckydaslama.com</span>
-             <br>
-             <span>©BengtBrodersen</span>
-           </div>
            <div class="issue-id badge"></div>
            <div class="issue-id-fadeout"></div>
            <div class="issue-icon badge" type="loading"></div>
@@ -1462,11 +1446,6 @@
        <div id="card-print-dialog">
          <div id="card-print-dialog-header">
            <div id="card-print-dialog-title">Card Printer</div>
-           <div id="info">
-             <label id="info-line"><b>Jira</b> - <b>Trello</b> - <b>YouTrack</b> - <b>PivotalTracker</b></label>
-             <div id="report-issue" class="ui-element button" >Report Issues</div>
-             <div id="about" class="ui-element button" >About</div>
-           </div>
          </div>
          <div id="card-print-dialog-content">
            <iframe id="card-print-dialog-content-iframe"></iframe>

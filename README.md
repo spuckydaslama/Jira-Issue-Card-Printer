@@ -1,24 +1,22 @@
 # Jira-Issue-Card-Printer
-Beautiful Jira Issue Card Printer
+Jira Issue Card Printer by https://github.com/qoomon
 
-I've written a little bookmarklet for converting Jira issues in a pretty card layout for printing.
-
-So long
-Bengt
+### Fork
+I removed the GA Tracking
 
 ### Card Layout
 ![Card Layout](CardExample.png)
 
 ### Installation
 #### Drag'n'Drop
-got to [Instalation Site](https://qoomon.github.io/Jira-Issue-Card-Printer/bookmarkInstalation.html)
+got to [Instalation Site](https://spuckydaslama.github.io/Jira-Issue-Card-Printer/bookmarkInstalation.html)
 
 *or*
 
 #### Manually
 Create Bookmark with folowing content.
 ```
-javascript:(function(){ var script = document.createElement("script"); script.src = "https://qoomon.github.io/Jira-Issue-Card-Printer/bookmarklet.js"; document.body.appendChild(script); document.body.removeChild(script);})();
+javascript:(function(){ var script = document.createElement("script"); script.src = "https://spuckydaslama.github.io/Jira-Issue-Card-Printer/bookmarklet.js"; document.body.appendChild(script); document.body.removeChild(script);})();
 ```
 
 ### Usage
@@ -42,8 +40,3 @@ search for issues und select *List View*
 * **Trello**
 * **PivotTracker**
 * **YouTrack**
-
-###Info
-I make use of **Google Analytics** to get some usage feedback. Please let me.
-I will only track the **pageview** and the **amount of rendered cards**
-**I do and will not track anything else**

@@ -1,13 +1,8 @@
 (function() {
-  // Public Instances
-  // Jira: https://connect.atlassian.net/browse/NERDS-33286
-  // PivotTracker: https://www.pivotaltracker.com/n/projects/510733
-  // Trello: https://trello.com/b/8zlPSh70/spike
-  // YouTrack: http://qoomon.myjetbrains.com/youtrack/dashboard
 
   var global = {};
   global.version = "4.4.1";
-  global.issueTrackingUrl = "https://github.com/qoomon/Jira-Issue-Card-Printer";
+  global.issueTrackingUrl = "https://github.com/spuckydaslama/Jira-Issue-Card-Printer";
 
   global.isDev = document.currentScript == null;
 
@@ -27,8 +22,6 @@
 
   function main() {
     var promises = [];
-
-    ga('send', 'pageview');
 
     //preconditions
     if ($("#card-printer-iframe").length > 0) {
@@ -97,31 +90,29 @@
     var promises = [];
 
     console.log("Init...")
-    initGoogleAnalytics();
 
     addStringFunctions();
     loadSettings();
 
-    global.hostOrigin = "https://qoomon.github.io/Jira-Issue-Card-Printer/";
+    global.hostOrigin = "https://spuckydaslama.github.io/Jira-Issue-Card-Printer/";
     if (global.isDev) {
       console.log("DEVELOPMENT");
-      global.hostOrigin = "https://rawgit.com/qoomon/Jira-Issue-Card-Printer/develop/";
+      global.hostOrigin = "https://rawgit.com/spuckydaslama/Jira-Issue-Card-Printer/develop/";
     }
     global.resourceOrigin = global.hostOrigin + "resources/";
 
     var resources = getResources();
 
     global.cardHtml = resources.cardHtml;
-    global.cardCss = resources.cardCss.replace(/https:\/\/qoomon.github.io\/Jira-Issue-Card-Printer\/resources/g, global.resourceOrigin);
+    global.cardCss = resources.cardCss.replace(/https:\/\/spuckydaslama.github.io\/Jira-Issue-Card-Printer\/resources/g, global.resourceOrigin);
     global.printPreviewHtml = resources.printPreviewHtml;
-    global.printPreviewCss = resources.printPreviewCss.replace(/https:\/\/qoomon.github.io\/Jira-Issue-Card-Printer\/resources/g, global.resourceOrigin);
+    global.printPreviewCss = resources.printPreviewCss.replace(/https:\/\/spuckydaslama.github.io\/Jira-Issue-Card-Printer\/resources/g, global.resourceOrigin);
 
     return Promise.all(promises);
   }
 
   function handleError(error){
     console.log("ERROR " + JSON.stringify(error,2,2));
-    ga('send', 'exception', { 'exDescription': error.message,'exFatal': true });
     alert("Sorry something went wrong.\n\n" + error.message +"\n\nPlease create an issue at " + global.issueTrackingUrl + "\n\n" + error.stack);
   }
 
@@ -152,7 +143,6 @@
   }
 
   function print() {
-    ga('send', 'event', 'button', 'click', 'print', $(".card", global.printFrame.contentWindow.document).length);
     global.printFrame.contentWindow.print();
   }
 
@@ -211,7 +201,6 @@
 
       promises.push(global.appFunctions.getCardData(issueKey).then(function(cardData) {
         console.log("cardData: " + JSON.stringify(cardData,2,2));
-        ga('send', 'event', 'card', 'generate', cardData.type);
         fillCard(card, cardData);
         redrawCards();
       }));
@@ -393,12 +382,12 @@
 
     // info
     result.find("#report-issue").click(function(event) {
-      window.open('https://github.com/qoomon/Jira-Issue-Card-Printer/issues');
+      window.open('https://github.com/spuckydaslama/Jira-Issue-Card-Printer/issues');
       return false;
     });
 
     result.find("#about").click(function(event) {
-      window.open('http://qoomon.blogspot.de/2014/01/jira-issue-card-printer-bookmarklet.html');
+      window.open('http://spuckydaslama.blogspot.de/2014/01/jira-issue-card-printer-bookmarklet.html');
       return false;
     });
 
@@ -521,7 +510,7 @@
     return result;
   }
 
-  // card layout: http://jsfiddle.net/qoomon/ykbLb2pw/76
+  // card layout: http://jsfiddle.net/spuckydaslama/ykbLb2pw/76
 
   function cardElement(issueKey) {
     var result = $('<div/>').html(global.cardHtml).contents()
@@ -1094,7 +1083,7 @@
          </div>
          <div class="card-header">
            <div class="author">
-             <span>qoomon.com</span>
+             <span>spuckydaslama.com</span>
              <br>
              <span>©BengtBrodersen</span>
            </div>
@@ -1165,7 +1154,7 @@
          width: 100%;
          border-style: solid;
          border-bottom-width: 0.5rem;
-         border-image: url(https://rawgit.com/qoomon/Jira-Issue-Card-Printer/develop/resources//Tearing.png);
+         border-image: url(https://rawgit.com/spuckydaslama/Jira-Issue-Card-Printer/develop/resources//Tearing.png);
          border-image-width: 0 0 0.7rem 0;
          border-image-slice: 56 0 56 1;
          border-image-repeat: round round;
@@ -1296,44 +1285,44 @@
        width: 3.0rem;
        border-radius: 50%;
        background-color: LIGHTSEAGREEN;
-       background-image: url(https://qoomon.github.io/Jira-Issue-Card-Printer/resources/icons/Objects.png);
+       background-image: url(https://spuckydaslama.github.io/Jira-Issue-Card-Printer/resources/icons/Objects.png);
        background-repeat: no-repeat;
        background-position: center;
        background-size: 63%;
      }
      .issue-icon[type="loading"]{
        background-color: DEEPSKYBLUE;
-       background-image: url(https://qoomon.github.io/Jira-Issue-Card-Printer/resources/icons/CloudLoading.png);
+       background-image: url(https://spuckydaslama.github.io/Jira-Issue-Card-Printer/resources/icons/CloudLoading.png);
      }
      .issue-icon[type="story"], .issue-icon[type="user story"] {
        background-color: GOLD;
-       background-image: url(https://qoomon.github.io/Jira-Issue-Card-Printer/resources/icons/Bulb.png);
+       background-image: url(https://spuckydaslama.github.io/Jira-Issue-Card-Printer/resources/icons/Bulb.png);
      }
      .issue-icon[type="bug"].issue-icon[type="problem"], .issue-icon[type="correction"],  {
        background-color: CRIMSON;
-       background-image: url(https://qoomon.github.io/Jira-Issue-Card-Printer/resources/icons/Bug.png);
+       background-image: url(https://spuckydaslama.github.io/Jira-Issue-Card-Printer/resources/icons/Bug.png);
      }
      .issue-icon[type="epic"] {
        background-color: ROYALBLUE;
-       background-image: url(https://qoomon.github.io/Jira-Issue-Card-Printer/resources/icons/Flash.png);
+       background-image: url(https://spuckydaslama.github.io/Jira-Issue-Card-Printer/resources/icons/Flash.png);
      }
      .issue-icon[type="task"], .issue-icon[type="sub-task"], .issue-icon[type="technical task"]
      .issue-icon[type="aufgabe"], .issue-icon[type="unteraufgabe"], .issue-icon[type="technische aufgabe"]  {
        background-color: WHEAT;
-       background-image: url(https://qoomon.github.io/Jira-Issue-Card-Printer/resources/icons/Task.png);
+       background-image: url(https://spuckydaslama.github.io/Jira-Issue-Card-Printer/resources/icons/Task.png);
      }
      .issue-icon[type="new feature"] {
        background-color: LIMEGREEN;
-       background-image: url(https://qoomon.github.io/Jira-Issue-Card-Printer/resources/icons/Plus.png);
+       background-image: url(https://spuckydaslama.github.io/Jira-Issue-Card-Printer/resources/icons/Plus.png);
      }
      .issue-icon[type="improvement"],
      .issue-icon[type="verbesserung"] {
        background-color: CORNFLOWERBLUE;
-       background-image: url(https://qoomon.github.io/Jira-Issue-Card-Printer/resources/icons/Arrow.png);
+       background-image: url(https://spuckydaslama.github.io/Jira-Issue-Card-Printer/resources/icons/Arrow.png);
      }
      .issue-icon[type="research"] {
        background-color: MEDIUMTURQUOISE;
-       background-image: url(https://qoomon.github.io/Jira-Issue-Card-Printer/resources/icons/ErlenmeyerFlask.png);
+       background-image: url(https://spuckydaslama.github.io/Jira-Issue-Card-Printer/resources/icons/ErlenmeyerFlask.png);
      }
      .issue-estimate {
        position: absolute;
@@ -1354,7 +1343,7 @@
        top: 0rem;
        width: 2.2rem;
        height: 2.2rem;
-       background-image: url(https://chart.googleapis.com/chart?cht=qr&chs=256x256&chld=L|1&chl=blog.qoomon.com);
+       background-image: url(https://chart.googleapis.com/chart?cht=qr&chs=256x256&chld=L|1&chl=blog.spuckydaslama.com);
        background-repeat: no-repeat;
        background-size: cover;
        background-position: center;
@@ -1367,7 +1356,7 @@
        height: 2.0rem;
        border-radius: 50%;
        background-color: LIGHTSKYBLUE;
-       background-image: url(https://qoomon.github.io/Jira-Issue-Card-Printer/resources/icons/Attachment.png);
+       background-image: url(https://spuckydaslama.github.io/Jira-Issue-Card-Printer/resources/icons/Attachment.png);
        background-repeat: no-repeat;
        background-position: center;
        background-size: 70%;
@@ -1445,7 +1434,7 @@
        height: 2.5rem;
        border-radius: 50%;
        background-color: ORCHID;
-       background-image: url(https://qoomon.github.io/Jira-Issue-Card-Printer/resources/icons/AlarmClock.png);
+       background-image: url(https://spuckydaslama.github.io/Jira-Issue-Card-Printer/resources/icons/AlarmClock.png);
        background-repeat: no-repeat;
        background-position: center;
        background-size: 65%;

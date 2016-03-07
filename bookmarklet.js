@@ -44,9 +44,13 @@
     // add overlay frame
     var appFrame = createOverlayFrame();
     $("body").append(appFrame);
+    
+    
     // add convinient fields
     appFrame.window = appFrame.contentWindow;
     appFrame.document = appFrame.window.document;
+    appFrame.document.open();
+    appFrame.document.close();
     global.appFrame = appFrame;
 
     // add print dialog content
@@ -59,6 +63,8 @@
     // add convinient fields
     printFrame.window = printFrame.contentWindow;
     printFrame.document = printFrame.window.document;
+    printFrame.document.open();
+    printFrame.document.close();
     global.printFrame = printFrame;
 
     // add listeners to redraw crads on print event
@@ -735,13 +741,20 @@
           return [document.URL.match(/.*\/stories\/([^?]*).*/)[1]];
         }
 
-        // Board
+        // Project Board
         if (/.*\/projects\/.*/g.test(document.URL)) {
-          return $('.story[data-id]:has(.selected)').map(function() {
+          return $('.story[data-id]:has(.selector.selected)').map(function() {
             return $(this).attr('data-id');
           });
         }
-
+        
+        // Workspace Board
+        if (/.*\/workspaces\/.*/g.test(document.URL)) {
+          return $('.story[data-id]:has(.selector.selected)').map(function() {
+            return $(this).attr('data-id');
+          });
+        }
+        
         return [];
       };
 
